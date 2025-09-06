@@ -19,7 +19,6 @@ class DoctorSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "created_by", "created_at"]
 
     def validate_email(self, value):
-        # On update, allow the same instance to keep its email
         instance = getattr(self, "instance", None)
         qs = Doctor.objects.filter(email__iexact=value)
         if instance:
@@ -36,7 +35,6 @@ class DoctorSerializer(serializers.ModelSerializer):
 
 
 class PatientDoctorSerializer(serializers.ModelSerializer):
-    # useful nested info (read-only)
     patient_name = serializers.ReadOnlyField(source="patient.name")
     doctor_name = serializers.ReadOnlyField(source="doctor.name")
     doctor_specialization = serializers.ReadOnlyField(source="doctor.specialization")
@@ -56,7 +54,6 @@ class PatientDoctorSerializer(serializers.ModelSerializer):
         read_only_fields = ["id", "assigned_by", "assigned_at"]
 
     def validate(self, attrs):
-        # Ensure the current user owns the patient when assigning
         request = self.context["request"]
         patient = attrs.get("patient")
         if patient.created_by_id != request.user.id:
