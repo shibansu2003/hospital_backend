@@ -159,13 +159,13 @@ Authorization: Bearer <access_token>
 Create a `.env` file in the project root with the following structure:
 
 ```env
-SECRET_KEY=shibansu123465
+SECRET_KEY=your_secret_key
 DEBUG=True
 ALLOWED_HOSTS=127.0.0.1,localhost
 
-DB_NAME=healthcare_db
-DB_USER=healthcare_user
-DB_PASSWORD=healthcare123
+DB_NAME=your_db_name
+DB_USER=Your_db_user_name
+DB_PASSWORD=Your_db_Password
 DB_HOST=127.0.0.1
 DB_PORT=5432
 
